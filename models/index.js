@@ -20,4 +20,4 @@ Book.hasMany(Borrow,{foreignKey:"book_id"});
 Borrow.belongsTo(Book,{foreignKey:"book_id"})
 
 
-export {sequelize, User,Member, Book, Borrow, Category}
+export {sequelize, User, Member, Book, Borrow, Category}
