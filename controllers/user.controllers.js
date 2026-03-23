@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import {User} from '../models/index.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-dotenv.config;
+dotenv.config();
 
 //Register
 
