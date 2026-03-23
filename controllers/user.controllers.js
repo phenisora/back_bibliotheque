@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-//Register
+//   Register
 
 export const register = async (req, res) => {
     try {
@@ -43,7 +43,7 @@ export const register = async (req, res) => {
     }
 }
 
-//Se Connecterr
+//   Se Connecterr
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -85,5 +85,25 @@ export const login = async (req, res) => {
 
     } catch (err) {
         return res.status(500).json({ error: err.message });
+    }
+};
+
+
+// Obtenir Profile
+export const getProfile = async (req, res) => {
+    try {
+      
+        const user = await User.findByPk(req.userId, {
+            attributes: ['id', 'name', 'email']
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: "Utilisateur non trouvé" });
+        }
+
+        return res.status(200).json(user);
+
+    } catch (error) { 
+        return res.status(500).json({ message: error.message });
     }
 };
