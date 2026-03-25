@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { sequelize , User} from './models/index.js';
 
 dotenv.config();
-//Cela va vérifier si la structure de la table a changé (ajout d'une colonne par exemple) et la modifier sans supprimer les données existantes.
+
 
 const createDefaultAdmin = async () => {
     const userCount = await User.count();
