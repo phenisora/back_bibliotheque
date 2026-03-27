@@ -22,7 +22,7 @@ const createDefaultAdmin = async () => {
 
 
 
-sequelize.sync({alter: true})
+sequelize.sync({})
      .then(async()=>{
         await createDefaultAdmin();
         app.listen(process.env.PORT || 3000,()=>{
