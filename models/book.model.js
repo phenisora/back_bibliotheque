@@ -37,7 +37,7 @@ const Book = sequelize.define(
       },
       available_quantity:{
         type:DataTypes.INTEGER,
-        default: 1,
+        defaultValue: 1,
       },
       cover_image:{
         type: DataTypes.STRING,

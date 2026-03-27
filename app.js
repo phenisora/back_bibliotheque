@@ -1,6 +1,6 @@
 import express from "express";
 import authRoutes from "./routes/auth.routes.js";
-import cors from 'cors';
+import cors from "cors";
 import categoryRoutes from "./routes/category.routes.js";
 import membersRoutes from "./routes/member.routes.js";
 
@@ -22,8 +22,5 @@ app.use('/api/members',membersRoutes);
 app.listen(5000, () => {
   console.log("Serveur lancé sur http://localhost:5000");
 });
-
-
-
 
 export default app;

@@ -7,7 +7,7 @@ export const getCategories = async (req, res) => {
         const categories = await Category.findAll({
             include: [{
                 model: Book,
-                as: 'Books', 
+                as: 'books', 
                 attributes: ['id']
             }]
         });
