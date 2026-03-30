@@ -1,5 +1,5 @@
 import express from 'express';
-import {creerMembre, getMembre,modifierMembre ,supprimerMembre,rechercherMembre} from '../controllers/member.controllers.js';
+import {creerMembre, getMembre,modifierMembre ,supprimerMembre} from '../controllers/member.controllers.js';
 import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -12,7 +12,7 @@ router.put("/:id",auth,modifierMembre);
 
 router.delete("/:id",auth,supprimerMembre);
 
-router.get("/search",auth,rechercherMembre);
+
 
 
 

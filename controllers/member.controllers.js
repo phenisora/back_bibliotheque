@@ -4,22 +4,32 @@ import { Op } from "sequelize";
 // 1 . Recuperer les membres
 export const getMembre = async (req, res) => {
     try {
-        // 1. Récupérer la page depuis l'URL (ex: ?page=1), par défaut 1
-        const page = parseInt(req.query.page) || 1;
-        const limit = 10; // Nombre de membres par page
-        const offset = (page - 1) * limit;
+        // 1. On récupère search depuis req.query (comme ton ami l'a fait pour les livres)
+        const { search, page = 1, limit = 10 } = req.query;
+        const offset = (parseInt(page) - 1) * parseInt(limit);
 
-        // 2. findAndCountAll récupère les données ET le nombre total
+        // 2. On prépare l'objet de recherche (exactement comme dans ton exemple précédent)
+        const where = {};
+
+        if (search) {
+            where[Op.or] = [
+                { first_name: { [Op.like]: `%${search}%` } }, // Recherche dans le prénom
+                { last_name: { [Op.like]: `%${search}%` } },  // Recherche dans le nom
+            ];
+        }
+
+        // 3. Exécution de la requête avec le filtre 'where'
         const { count, rows } = await Member.findAndCountAll({
-            limit: limit,
+            where, // On applique le filtre ici
+            limit: parseInt(limit),
             offset: offset,
-            order: [['createdAt', 'DESC']] // Les plus récents en premier
+            order: [['createdAt', 'DESC']]
         });
 
-        // 3. Renvoyer exactement le format de l'image du prof
+        // 4. Renvoi du résultat au format attendu par le prof
         return res.status(200).json({
             total: count,
-            page: page,
+            page: parseInt(page),
             totalPages: Math.ceil(count / limit),
             members: rows
         });
@@ -108,23 +118,5 @@ export const supprimerMembre = async (req,res) => {
 
 };
 
-// 5. Rechercher un membre
 
-export const rechercherMembre = async (req,res) => {
-    try {
-        const nom = req.query.nom; 
-
-        const membres = await Member.findAll({
-            where: {
-                last_name: { [Op.like]: `%${nom}%` } 
-            }
-        });
-
-        res.json(membres); 
-
-    } catch (error) {
-        res.status(500).json({ message: "Erreur" });
-    }
-
-};
 
