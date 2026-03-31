@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use(auth); 
 
-router.post("/create", upload.single("cover_image"), validateData(bookSchema), createBook);
+router.post("/", upload.single("cover_image"), validateData(bookSchema), createBook);
 router.get("/", getBooks);
 router.put("/:id", upload.single("cover_image"), validateData(bookSchema), updateBook);
 router.delete("/:id",deleteBook);

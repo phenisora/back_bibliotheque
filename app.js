@@ -5,6 +5,7 @@ import categoryRoutes from "./routes/category.routes.js";
 import membersRoutes from "./routes/member.routes.js";
 import bookRoutes from "./routes/book.routes.js";
 import borrowsRoutes from "./routes/borrow.routes.js";
+import statsRoutes from "./routes/stats.routes.js"
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/api/books', bookRoutes);
 
 app.use('/api/borrows',borrowsRoutes);
 
+app.use("/api/stats", statsRoutes);
 
 
 
