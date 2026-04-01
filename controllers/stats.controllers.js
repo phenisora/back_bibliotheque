@@ -1,21 +1,18 @@
-
-import { Book, Member, Borrow,sequelize } from "../models/index.js";
+import { Book, Member, Borrow, sequelize } from "../models/index.js";
 import { Op } from "sequelize";
-
 
 export const getBooksStats = async (req, res) => {
   try {
-    const totalBooks = await Book.count();
-    const totalAvailable = await Book.count({
-      where: { available_quantity: { [Op.gt]: 0 } },
-    });
+    //const totalBooks = await Book.count(); // petit changement car  count retourne le nombre de ligne et non le total
+    const totalBooks = await Book.sum("quantity");
+
+    const totalAvailable = await Book.sum("available_quantity");
 
     return res.status(200).json({ totalBooks, totalAvailable });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
 };
-
 
 export const getMembersStats = async (req, res) => {
   try {
@@ -30,7 +27,6 @@ export const getMembersStats = async (req, res) => {
   }
 };
 
-
 export const getBorrowsStats = async (req, res) => {
   try {
     const totalBorrows = await Borrow.count();
@@ -44,7 +40,7 @@ export const getBorrowsStats = async (req, res) => {
       where: { status: "overdue" },
     });
 
-    // Livres les plus empruntés
+    // Livres les plus empruntéssssss
     const mostBorrowed = await Borrow.findAll({
       attributes: [
         "book_id",

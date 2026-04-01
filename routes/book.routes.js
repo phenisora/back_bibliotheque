@@ -15,3 +15,4 @@ router.put("/:id", upload.single("cover_image"), validateData(bookSchema), updat
 router.delete("/:id",deleteBook);
 
 export default router;
+
