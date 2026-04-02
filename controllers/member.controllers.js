@@ -4,11 +4,11 @@ import { Op } from "sequelize";
 // 1 . Recuperer les membres
 export const getMembre = async (req, res) => {
     try {
-        // 1. On récupère search depuis req.query (comme ton ami l'a fait pour les livres)
+        // 1. On récupère search depuis req.query 
         const { search, page = 1, limit = 10 } = req.query;
         const offset = (parseInt(page) - 1) * parseInt(limit);
 
-        // 2. On prépare l'objet de recherche (exactement comme dans ton exemple précédent)
+        // 2. On prépare l'objet de recherche 
         const where = {};
 
         if (search) {
